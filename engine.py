@@ -1,5 +1,4 @@
-SPACE = ' '
-BRICK = '#'
+from constants import BRICK, SPACE
 
 def create_board(width, height):
     board = []
