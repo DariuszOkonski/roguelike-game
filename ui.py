@@ -1,11 +1,5 @@
 import os
 
-def clear_console():
-    '''Clears Console'''
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def clear_console_pycharm():
-    print('\n' * 80)
 
 def display_board(board):
     '''
@@ -14,7 +8,6 @@ def display_board(board):
     Returns:
     Nothing
     '''
-    clear_console()
     print("\n")
     for i in range(len(board)):
         temp_str = ''

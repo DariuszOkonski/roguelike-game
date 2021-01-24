@@ -18,32 +18,36 @@ def create_player():
     Returns:
     dictionary
     '''
-    pass
-
+    player = {
+        'icon': PLAYER_ICON,
+        'row': PLAYER_START_X,
+        'col': PLAYER_START_Y
+    }
+    return player
 
 def main():
     player = create_player()
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
-
+    engine.put_player_on_board(board, player)
+    ui.display_board(board)
     util.clear_screen()
-    is_running = True
-    while is_running:
-        engine.put_player_on_board(board, player)
-        ui.display_board(board)
-
-        key = util.key_pressed()
-        if key == 'q':
-            is_running = False
-        else:
-            pass
-        util.clear_screen()
+    ui.display_board(board)
+    # util.clear_screen()
+    # is_running = True
+    # while is_running:
+    #     engine.put_player_on_board(board, player)
+    #     ui.display_board(board)
+    #
+    #     key = util.key_pressed()
+    #     if key == 'q':
+    #         is_running = False
+    #     else:
+    #         pass
+    #     util.clear_screen()
 
 
 if __name__ == '__main__':
-    # main()
-
-    print("hello world")
-
+    main()
 
 '''
     1 - creature (human? alien? ant? hacker?)
