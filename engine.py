@@ -22,6 +22,9 @@ def build_gates_at_sides(board):
     board[2][0] = GATE
     board[3][width - 1] = GATE
 
+def clear_player_previous_position(board, row, col):
+    board[row][col] = SPACE
+
 def create_board(width=5, height=5):
     board = build_an_empty_board(width, height)
     build_bricks_wall_around_board(board)

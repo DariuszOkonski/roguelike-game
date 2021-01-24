@@ -28,22 +28,22 @@ def create_player():
 def main():
     player = create_player()
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
-    engine.put_player_on_board(board, player)
     ui.display_board(board)
     util.clear_screen()
-    ui.display_board(board)
-    # util.clear_screen()
-    # is_running = True
-    # while is_running:
-    #     engine.put_player_on_board(board, player)
-    #     ui.display_board(board)
-    #
-    #     key = util.key_pressed()
-    #     if key == 'q':
-    #         is_running = False
-    #     else:
-    #         pass
-    #     util.clear_screen()
+    is_running = True
+    while is_running:
+        engine.put_player_on_board(board, player)
+        ui.display_board(board)
+
+        key = util.key_pressed().lower()
+        if key == 'q':
+            is_running = False
+        elif key == 'd':
+            engine.clear_player_previous_position(board, player['row'], player['col'])
+            player['col'] += 1
+        else:
+            pass
+        util.clear_screen()
 
 
 if __name__ == '__main__':

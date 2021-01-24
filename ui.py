@@ -8,7 +8,6 @@ def display_board(board):
     Returns:
     Nothing
     '''
-    print("\n")
     for i in range(len(board)):
         temp_str = ''
         for j in range(len(board[i])):
