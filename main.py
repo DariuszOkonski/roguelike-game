@@ -59,6 +59,8 @@ def main():
                 player['row'] += 1
         else:
             pass
+
+        player, board = engine.check_if_change_board(player, board)
         util.clear_screen()
 
 
