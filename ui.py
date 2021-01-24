@@ -1,7 +1,7 @@
 import os
 
 
-def display_board(board):
+def display_board(board, player):
     '''
     Displays complete game board on the screen
 
@@ -15,5 +15,5 @@ def display_board(board):
         print(temp_str)
 
     print("\n")
-    print("SCORE: 123")
+    print(f"LIVE: {player['live']}")
     print("MOVES w - s - a - d")

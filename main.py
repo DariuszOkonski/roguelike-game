@@ -21,19 +21,20 @@ def create_player():
     player = {
         'icon': PLAYER_ICON,
         'row': PLAYER_START_X,
-        'col': PLAYER_START_Y
+        'col': PLAYER_START_Y,
+        'live': 50
     }
     return player
 
 def main():
     player = create_player()
     board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
-    ui.display_board(board)
+    ui.display_board(board, player)
     util.clear_screen()
     is_running = True
     while is_running:
         engine.put_player_on_board(board, player)
-        ui.display_board(board)
+        ui.display_board(board, player)
 
         key = util.key_pressed().lower()
         engine.clear_player_previous_position(board, player['row'], player['col'])
