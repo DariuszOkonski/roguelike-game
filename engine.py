@@ -1,4 +1,4 @@
-from constants import BRICK, SPACE, GATE
+from constants import BRICK, SPACE, GATE, PLAYER
 from ui import display_board
 
 def create_board(width=5, height=5):
@@ -34,7 +34,11 @@ def put_player_on_board(board, player):
     Returns:
     Nothing
     '''
+    row = int(PLAYER['row'])
+    col = int(PLAYER['col'])
+    board[row][col] = PLAYER['icon']
     pass
 
 board = create_board(10, 10)
+put_player_on_board(board, PLAYER)
 display_board(board)

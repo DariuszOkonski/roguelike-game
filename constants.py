@@ -1,4 +1,8 @@
 SPACE = ' '
 BRICK = '#'
 GATE = 'G'
-PLAYER = '@'
+PLAYER = {
+    'icon': '@',
+    'row': 3,
+    'col': 3
+}
