@@ -44,6 +44,20 @@ def check_if_change_board(player, board):
         player['col'] = LEFT_MAIN_DOOR_COL + 1
         return player, board
 
+    if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == width -1:
+        board = build_an_empty_board(width, height)
+        board = build_gates_at_sides_level_three(board)
+        player['row'] = RIGHT_MAIN_DOOR_ROW
+        player['col'] = LEFT_MAIN_DOOR_COL + 1
+        return player, board
+
+    if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
+        board = build_an_empty_board(width, height)
+        board = build_gates_at_sides_level_one(board)
+        player['row'] = RIGHT_MAIN_DOOR_ROW
+        player['col'] = width - 2
+        return player, board
+
     return player, board
 
 def build_gates_at_sides_level_one(board):
@@ -64,9 +78,17 @@ def build_gates_at_sides_level_two(board):
     board = build_an_empty_board(width, height)
 
     board[LEFT_MAIN_DOOR_ROW][width - 1] = GATE
-    board[LEFT_MAIN_DOOR_ROW][LEFT_MAIN_DOOR_COL] = BRICK
+    # board[LEFT_MAIN_DOOR_ROW][LEFT_MAIN_DOOR_COL] = BRICK
     # board[RIGHT_MAIN_DOOR_ROW][width - 1] = BRICK
     build_board_level_two(board)
+    return board
+
+def build_gates_at_sides_level_three(board):
+    width = len(board[0])
+    height = len(board)
+    board = build_an_empty_board(width, height)
+    board[RIGHT_MAIN_DOOR_ROW][0] = GATE
+    build_board_level_three(board)
     return board
 
 def clear_player_previous_position(board, row, col):
