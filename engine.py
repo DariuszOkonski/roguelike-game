@@ -1,5 +1,6 @@
 from constants import BRICK, SPACE, GATE
 from ui import display_board
+from levels import build_board_level_one
 
 def build_an_empty_board(width, height):
     board = []
@@ -17,15 +18,12 @@ def build_bricks_wall_around_board(board):
             elif j == 0 or j == width - 1:
                 board[i][j] = BRICK
 
-    board[5][5] = BRICK
-    board[6][5] = BRICK
-    board[7][5] = BRICK
-    board[8][5] = BRICK
-
 def build_gates_at_sides(board):
     width = len(board[0])
     board[2][0] = GATE
     board[3][width - 1] = GATE
+
+    build_board_level_one(board)
 
 def clear_player_previous_position(board, row, col):
     board[row][col] = SPACE
