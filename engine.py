@@ -17,6 +17,11 @@ def build_bricks_wall_around_board(board):
             elif j == 0 or j == width - 1:
                 board[i][j] = BRICK
 
+    board[5][5] = BRICK
+    board[6][5] = BRICK
+    board[7][5] = BRICK
+    board[8][5] = BRICK
+
 def build_gates_at_sides(board):
     width = len(board[0])
     board[2][0] = GATE
