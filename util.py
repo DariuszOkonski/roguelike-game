@@ -26,6 +26,7 @@ def key_pressed():
         return ch
 
 
+
 def clear_screen():
     if os.name == "nt":
         os.system('cls')
