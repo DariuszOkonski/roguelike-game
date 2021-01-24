@@ -1,21 +1,24 @@
+SPACE = ' '
+BRICK = '#'
+
 def create_board(width, height):
-    '''
-    Creates a new game board based on input parameters.
-
-    Args:
-    int: The width of the board
-    int: The height of the board
-
-    Returns:
-    list: Game board
-    '''
     board = []
     for _ in range(height):
-        board.append([''] * width)
+        board.append([SPACE] * width)
+
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if i == 0 or i == height - 1:
+                board[i][j] = BRICK
+            elif j == 0 or j == width - 1:
+                board[i][j] = BRICK
 
     return board
-    pass
-print(create_board(4, 4))
+
+
+
+
+print(create_board(10, 10))
 
 
 
