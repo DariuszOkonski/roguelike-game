@@ -1,2 +1,3 @@
 SPACE = ' '
 BRICK = '#'
+GATE = 'G'
