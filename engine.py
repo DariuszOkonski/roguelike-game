@@ -19,6 +19,8 @@ def create_board(width=5, height=5):
     board[2][0] = GATE
     board[3][width-1] = GATE
 
+    # TODO - he game has at least 3 boards/levels with different inhabitants.
+
     return board
 
 def put_player_on_board(board, player):
