@@ -40,4 +40,26 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+
+    print("hello world")
+
+
+'''
+    1 - creature (human? alien? ant? hacker?)
+    2 - wild world (forest? planet? table? meetups?)
+    3 - will be levelling up, getting tougher, collecting powerful items, and finally be able to defeat an ultimate boss
+    4 - obstacles (rivers? craters? drops of milk? firewalls?) 
+'''
+
+
+
+
+
+
+
+
+
+
+
+
