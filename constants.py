@@ -1,6 +1,6 @@
 SPACE = ' '
 BRICK = '#'
-GATE = 'G'
+GATE = 'E'
 PLAYER = {
     'icon': '@',
     'row': 3,
