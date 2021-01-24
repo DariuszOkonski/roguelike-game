@@ -36,11 +36,27 @@ def main():
         ui.display_board(board)
 
         key = util.key_pressed().lower()
+        engine.clear_player_previous_position(board, player['row'], player['col'])
+        row = player['row']
+        col = player['col']
         if key == 'q':
             is_running = False
         elif key == 'd':
-            engine.clear_player_previous_position(board, player['row'], player['col'])
-            player['col'] += 1
+            #move right
+            if engine.can_player_move(board, row, col + 1):
+                player['col'] += 1
+        elif key == 'a':
+            #move left
+            if engine.can_player_move(board, row, col - 1):
+                player['col'] -= 1
+        elif key == 'w':
+            #move up
+            if engine.can_player_move(board, row - 1, col):
+                player['row'] -= 1
+        elif key == 's':
+            #move down
+            if engine.can_player_move(board, row + 1, col):
+                player['row'] += 1
         else:
             pass
         util.clear_screen()
