@@ -15,5 +15,6 @@ def display_board(board, player):
         print(temp_str)
 
     print("\n")
+    print(f"BOARD: {player['current_board']}")
     print(f"LIVE: {player['live']}")
     print("MOVES w - s - a - d")

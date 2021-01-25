@@ -22,6 +22,7 @@ def create_player():
         'icon': PLAYER_ICON,
         'row': PLAYER_START_X,
         'col': PLAYER_START_Y,
+        'current_board': 'central',
         'live': 50
     }
     return player

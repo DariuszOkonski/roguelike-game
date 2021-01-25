@@ -7,3 +7,9 @@ FOOD = {
     'icon': 'F',
     'live': 5
 }
+
+FOOD_SUPPLIES = {
+    'central': [(3, 10), (10, 10)],
+    'left': [],
+    'right': []
+    }
