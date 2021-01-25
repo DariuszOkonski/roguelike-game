@@ -32,7 +32,7 @@ def check_if_change_board(player, board):
     #change to board left, left gate at board central
     if player['row'] == LEFT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_left_board(board)
+        board = build_gates_at_left_board(player, board)
         player['row'] = LEFT_MAIN_DOOR_ROW
         player['col'] = width - 2
         player['current_board'] = 'left'
@@ -41,7 +41,7 @@ def check_if_change_board(player, board):
     # change to board central, right gate at board left
     if player['row'] == LEFT_MAIN_DOOR_ROW and player['col'] == width - 1:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_central_board(board)
+        board = build_gates_at_central_board(player, board)
         player['row'] = LEFT_MAIN_DOOR_ROW
         player['col'] = LEFT_MAIN_DOOR_COL + 1
         player['current_board'] = 'central'
@@ -49,7 +49,7 @@ def check_if_change_board(player, board):
     # change to board right, right gate at board central
     if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == width -1:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_right_board(board)
+        board = build_gates_at_right_board(player, board)
         player['row'] = RIGHT_MAIN_DOOR_ROW
         player['col'] = LEFT_MAIN_DOOR_COL + 1
         player['current_board'] = 'right'
@@ -58,7 +58,7 @@ def check_if_change_board(player, board):
     # change to board central, left gate at board right
     if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_central_board(board)
+        board = build_gates_at_central_board(player, board)
         player['row'] = RIGHT_MAIN_DOOR_ROW
         player['col'] = width - 2
         player['current_board'] = 'central'
@@ -66,11 +66,12 @@ def check_if_change_board(player, board):
 
     return player, board
 
-def set_food_on_board(board):
-    #TODO - implement funcionality to display food on board
+def set_food_on_board(board, room):
+    for row, col in FOOD_SUPPLIES[room]:
+        board[row][col] = FOOD['icon']
     return board
 
-def build_gates_at_central_board(board):
+def build_gates_at_central_board(player, board):
     width = len(board[0])
     height = len(board)
     board = build_an_empty_board(width, height)
@@ -78,12 +79,13 @@ def build_gates_at_central_board(board):
     board[LEFT_MAIN_DOOR_ROW][LEFT_MAIN_DOOR_COL] = GATE
     board[RIGHT_MAIN_DOOR_ROW][width - 1] = GATE
 
-    board = set_food_on_board(board)
+    if player['current_board'] == 'central':
+        board = set_food_on_board(board, player['current_board'])
     board = build_board_content_central(board)
 
     return board
 
-def build_gates_at_left_board(board):
+def build_gates_at_left_board(player, board):
     width = len(board[0])
     height = len(board)
     board = build_an_empty_board(width, height)
@@ -92,7 +94,7 @@ def build_gates_at_left_board(board):
     board = build_board_content_left(board)
     return board
 
-def build_gates_at_right_board(board):
+def build_gates_at_right_board(player, board):
     width = len(board[0])
     height = len(board)
     board = build_an_empty_board(width, height)
@@ -118,9 +120,9 @@ def can_player_move(player, board, row, col):
     else:
         return True
 
-def create_board(width=5, height=5):
+def create_board(player, width=5, height=5):
     board = build_an_empty_board(width, height)
-    board = build_gates_at_central_board(board)
+    board = build_gates_at_central_board(player, board)
 
     return board
 

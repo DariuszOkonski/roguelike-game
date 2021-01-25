@@ -29,7 +29,7 @@ def create_player():
 
 def main():
     player = create_player()
-    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
+    board = engine.create_board(player, BOARD_WIDTH, BOARD_HEIGHT)
     ui.display_board(board, player)
     util.clear_screen()
     is_running = True
