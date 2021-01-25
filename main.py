@@ -1,6 +1,7 @@
 import util
 import engine
 import ui
+from constants import CURRENT_BOARD, ICON, ROW, COL, LIVE, CENTRAL
 
 PLAYER_ICON = '@'
 PLAYER_START_X = 3
@@ -19,17 +20,17 @@ def create_player():
     dictionary
     '''
     player = {
-        'icon': PLAYER_ICON,
-        'row': PLAYER_START_X,
-        'col': PLAYER_START_Y,
-        'current_board': 'central',
-        'live': 50
+        ICON: PLAYER_ICON,
+        ROW: PLAYER_START_X,
+        COL: PLAYER_START_Y,
+        CURRENT_BOARD: CENTRAL,
+        LIVE: 50
     }
     return player
 
 def main():
     player = create_player()
-    board = engine.create_board(player, BOARD_WIDTH, BOARD_HEIGHT)
+    board = engine.create_board(BOARD_WIDTH, BOARD_HEIGHT)
     ui.display_board(board, player)
     util.clear_screen()
     is_running = True
@@ -38,27 +39,27 @@ def main():
         ui.display_board(board, player)
 
         key = util.key_pressed().lower()
-        engine.clear_player_previous_position(board, player['row'], player['col'])
-        row = player['row']
-        col = player['col']
+        engine.clear_player_previous_position(board, player[ROW], player[COL])
+        row = player[ROW]
+        col = player[COL]
         if key == 'q':
             is_running = False
         elif key == 'd':
             #move right
             if engine.can_player_move(player, board, row, col + 1):
-                player['col'] += 1
+                player[COL] += 1
         elif key == 'a':
             #move left
             if engine.can_player_move(player, board, row, col - 1):
-                player['col'] -= 1
+                player[COL] -= 1
         elif key == 'w':
             #move up
             if engine.can_player_move(player, board, row - 1, col):
-                player['row'] -= 1
+                player[ROW] -= 1
         elif key == 's':
             #move down
             if engine.can_player_move(player, board, row + 1, col):
-                player['row'] += 1
+                player[ROW] += 1
         else:
             pass
 

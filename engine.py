@@ -1,4 +1,5 @@
-from constants import BRICK, SPACE, GATE, FOOD, FOOD_SUPPLIES
+from constants import BRICK, SPACE, GATE, FOOD, FOOD_SUPPLIES, ROW, \
+    COL, CURRENT_BOARD, CENTRAL, LEFT, RIGHT, ICON, LIVE
 from ui import display_board
 from levels import build_board_content_central, build_board_content_left, build_board_content_right
 
@@ -30,45 +31,45 @@ def check_if_change_board(player, board):
     width = len(board[0])
     height = len(board)
     #change to board left, left gate at board central
-    if player['row'] == LEFT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
+    if player[ROW] == LEFT_MAIN_DOOR_ROW and player[COL] == LEFT_MAIN_DOOR_COL:
         board = build_an_empty_board(width, height)
         board = build_gates_at_left_board(board)
-        player['row'] = LEFT_MAIN_DOOR_ROW
-        player['col'] = width - 2
-        player['current_board'] = 'left'
+        player[ROW] = LEFT_MAIN_DOOR_ROW
+        player[COL] = width - 2
+        player[CURRENT_BOARD] = LEFT
         return player, board
 
     # change to board central, right gate at board left
-    if player['row'] == LEFT_MAIN_DOOR_ROW and player['col'] == width - 1:
+    if player[ROW] == LEFT_MAIN_DOOR_ROW and player[COL] == width - 1:
         board = build_an_empty_board(width, height)
         board = build_gates_at_central_board(board)
-        player['row'] = LEFT_MAIN_DOOR_ROW
-        player['col'] = LEFT_MAIN_DOOR_COL + 1
-        player['current_board'] = 'central'
+        player[ROW] = LEFT_MAIN_DOOR_ROW
+        player[COL] = LEFT_MAIN_DOOR_COL + 1
+        player[CURRENT_BOARD] = CENTRAL
         return player, board
     # change to board right, right gate at board central
-    if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == width -1:
+    if player[ROW] == RIGHT_MAIN_DOOR_ROW and player[COL] == width -1:
         board = build_an_empty_board(width, height)
         board = build_gates_at_right_board(board)
-        player['row'] = RIGHT_MAIN_DOOR_ROW
-        player['col'] = LEFT_MAIN_DOOR_COL + 1
-        player['current_board'] = 'right'
+        player[ROW] = RIGHT_MAIN_DOOR_ROW
+        player[COL] = LEFT_MAIN_DOOR_COL + 1
+        player[CURRENT_BOARD] = RIGHT
         return player, board
 
     # change to board central, left gate at board right
-    if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
+    if player[ROW] == RIGHT_MAIN_DOOR_ROW and player[COL] == LEFT_MAIN_DOOR_COL:
         board = build_an_empty_board(width, height)
         board = build_gates_at_central_board(board)
-        player['row'] = RIGHT_MAIN_DOOR_ROW
-        player['col'] = width - 2
-        player['current_board'] = 'central'
+        player[ROW] = RIGHT_MAIN_DOOR_ROW
+        player[COL] = width - 2
+        player[CURRENT_BOARD] = CENTRAL
         return player, board
 
     return player, board
 
 def set_food_on_board(board, room):
     for row, col in FOOD_SUPPLIES[room]:
-        board[row][col] = FOOD['icon']
+        board[row][col] = FOOD[ICON]
     return board
 
 def build_gates_at_central_board(board):
@@ -79,7 +80,7 @@ def build_gates_at_central_board(board):
     board[LEFT_MAIN_DOOR_ROW][LEFT_MAIN_DOOR_COL] = GATE
     board[RIGHT_MAIN_DOOR_ROW][width - 1] = GATE
 
-    board = set_food_on_board(board, 'central')
+    board = set_food_on_board(board, CENTRAL)
     board = build_board_content_central(board)
 
     return board
@@ -91,7 +92,7 @@ def build_gates_at_left_board(board):
 
     board[LEFT_MAIN_DOOR_ROW][width - 1] = GATE
 
-    set_food_on_board(board, 'left')
+    board = set_food_on_board(board, LEFT)
 
     board = build_board_content_left(board)
     return board
@@ -102,7 +103,7 @@ def build_gates_at_right_board(board):
     board = build_an_empty_board(width, height)
     board[RIGHT_MAIN_DOOR_ROW][0] = GATE
 
-    set_food_on_board(board, 'right')
+    board = set_food_on_board(board, RIGHT)
 
     board = build_board_content_right(board)
     return board
@@ -111,14 +112,14 @@ def clear_player_previous_position(board, row, col):
     board[row][col] = SPACE
 
 def check_if_inventory(player, board, row, col):
-    if board[row][col] == FOOD['icon']:
-        player['live'] += FOOD['live']
+    if board[row][col] == FOOD[ICON]:
+        player[LIVE] += FOOD[LIVE]
         board[row][col] = SPACE
 
         temp_tuple = (row, col)
-        for item in FOOD_SUPPLIES[player['current_board']]:
+        for item in FOOD_SUPPLIES[player[CURRENT_BOARD]]:
             if item == temp_tuple:
-                FOOD_SUPPLIES[player['current_board']].remove(item)
+                FOOD_SUPPLIES[player[CURRENT_BOARD]].remove(item)
 
         #TODO - remove food from food suplies
     return board
@@ -131,7 +132,7 @@ def can_player_move(player, board, row, col):
     else:
         return True
 
-def create_board(player, width=5, height=5):
+def create_board(width=5, height=5):
     board = build_an_empty_board(width, height)
     board = build_gates_at_central_board(board)
 
@@ -148,7 +149,7 @@ def put_player_on_board(board, player):
     Returns:
     Nothing
     '''
-    row = int(player['row'])
-    col = int(player['col'])
-    board[row][col] = player['icon']
+    row = int(player[ROW])
+    col = int(player[COL])
+    board[row][col] = player[ICON]
     pass

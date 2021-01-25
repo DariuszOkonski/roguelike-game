@@ -1,3 +1,13 @@
+CENTRAL = 'central'
+RIGHT = 'right'
+LEFT = 'left'
+
+CURRENT_BOARD = 'current_board'
+LIVE = 'live'
+ICON = 'icon'
+ROW = 'row'
+COL = 'col'
+
 SPACE = ' '
 BRICK = '#'
 GATE = 'I'

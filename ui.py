@@ -1,5 +1,5 @@
 import os
-
+from constants import CURRENT_BOARD, LIVE
 
 def display_board(board, player):
     '''
@@ -15,6 +15,6 @@ def display_board(board, player):
         print(temp_str)
 
     print("\n")
-    print(f"BOARD: {player['current_board']}")
-    print(f"LIVE: {player['live']}")
+    print(f"BOARD: {player[CURRENT_BOARD]}")
+    print(f"LIVE: {player[LIVE]}")
     print("MOVES w - s - a - d")
