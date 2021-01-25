@@ -1,4 +1,4 @@
-from constants import BRICK, SPACE, GATE
+from constants import BRICK, SPACE, GATE, FOOD
 from ui import display_board
 from levels import build_board_content_central, build_board_content_left, build_board_content_right
 
@@ -93,7 +93,16 @@ def build_gates_at_right_board(board):
 def clear_player_previous_position(board, row, col):
     board[row][col] = SPACE
 
-def can_player_move(board, row, col):
+def check_if_inventory(player, board, row, col):
+    if board[row][col] == FOOD['icon']:
+        player['live'] += FOOD['live']
+        board[row][col] = SPACE
+
+    return board
+
+def can_player_move(player, board, row, col):
+    board = check_if_inventory(player, board, row, col)
+
     if board[row][col] == BRICK:
         return False
     else:

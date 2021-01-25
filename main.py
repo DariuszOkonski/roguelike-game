@@ -44,19 +44,19 @@ def main():
             is_running = False
         elif key == 'd':
             #move right
-            if engine.can_player_move(board, row, col + 1):
+            if engine.can_player_move(player, board, row, col + 1):
                 player['col'] += 1
         elif key == 'a':
             #move left
-            if engine.can_player_move(board, row, col - 1):
+            if engine.can_player_move(player, board, row, col - 1):
                 player['col'] -= 1
         elif key == 'w':
             #move up
-            if engine.can_player_move(board, row - 1, col):
+            if engine.can_player_move(player, board, row - 1, col):
                 player['row'] -= 1
         elif key == 's':
             #move down
-            if engine.can_player_move(board, row + 1, col):
+            if engine.can_player_move(player, board, row + 1, col):
                 player['row'] += 1
         else:
             pass
