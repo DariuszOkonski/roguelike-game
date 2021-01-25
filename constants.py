@@ -10,6 +10,6 @@ FOOD = {
 
 FOOD_SUPPLIES = {
     'central': [(3, 10), (10, 10), (12, 12)],
-    'left': [],
-    'right': []
+    'left': [(2, 2), (4, 5)],
+    'right': [(4, 7)]
     }

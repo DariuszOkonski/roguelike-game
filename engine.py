@@ -32,7 +32,7 @@ def check_if_change_board(player, board):
     #change to board left, left gate at board central
     if player['row'] == LEFT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_left_board(player, board)
+        board = build_gates_at_left_board(board)
         player['row'] = LEFT_MAIN_DOOR_ROW
         player['col'] = width - 2
         player['current_board'] = 'left'
@@ -41,7 +41,7 @@ def check_if_change_board(player, board):
     # change to board central, right gate at board left
     if player['row'] == LEFT_MAIN_DOOR_ROW and player['col'] == width - 1:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_central_board(player, board)
+        board = build_gates_at_central_board(board)
         player['row'] = LEFT_MAIN_DOOR_ROW
         player['col'] = LEFT_MAIN_DOOR_COL + 1
         player['current_board'] = 'central'
@@ -49,7 +49,7 @@ def check_if_change_board(player, board):
     # change to board right, right gate at board central
     if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == width -1:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_right_board(player, board)
+        board = build_gates_at_right_board(board)
         player['row'] = RIGHT_MAIN_DOOR_ROW
         player['col'] = LEFT_MAIN_DOOR_COL + 1
         player['current_board'] = 'right'
@@ -58,7 +58,7 @@ def check_if_change_board(player, board):
     # change to board central, left gate at board right
     if player['row'] == RIGHT_MAIN_DOOR_ROW and player['col'] == LEFT_MAIN_DOOR_COL:
         board = build_an_empty_board(width, height)
-        board = build_gates_at_central_board(player, board)
+        board = build_gates_at_central_board(board)
         player['row'] = RIGHT_MAIN_DOOR_ROW
         player['col'] = width - 2
         player['current_board'] = 'central'
@@ -71,7 +71,7 @@ def set_food_on_board(board, room):
         board[row][col] = FOOD['icon']
     return board
 
-def build_gates_at_central_board(player, board):
+def build_gates_at_central_board(board):
     width = len(board[0])
     height = len(board)
     board = build_an_empty_board(width, height)
@@ -79,26 +79,31 @@ def build_gates_at_central_board(player, board):
     board[LEFT_MAIN_DOOR_ROW][LEFT_MAIN_DOOR_COL] = GATE
     board[RIGHT_MAIN_DOOR_ROW][width - 1] = GATE
 
-    if player['current_board'] == 'central':
-        board = set_food_on_board(board, player['current_board'])
+    board = set_food_on_board(board, 'central')
     board = build_board_content_central(board)
 
     return board
 
-def build_gates_at_left_board(player, board):
+def build_gates_at_left_board(board):
     width = len(board[0])
     height = len(board)
     board = build_an_empty_board(width, height)
 
     board[LEFT_MAIN_DOOR_ROW][width - 1] = GATE
+
+    set_food_on_board(board, 'left')
+
     board = build_board_content_left(board)
     return board
 
-def build_gates_at_right_board(player, board):
+def build_gates_at_right_board(board):
     width = len(board[0])
     height = len(board)
     board = build_an_empty_board(width, height)
     board[RIGHT_MAIN_DOOR_ROW][0] = GATE
+
+    set_food_on_board(board, 'right')
+
     board = build_board_content_right(board)
     return board
 
@@ -110,6 +115,12 @@ def check_if_inventory(player, board, row, col):
         player['live'] += FOOD['live']
         board[row][col] = SPACE
 
+        temp_tuple = (row, col)
+        for item in FOOD_SUPPLIES[player['current_board']]:
+            if item == temp_tuple:
+                FOOD_SUPPLIES[player['current_board']].remove(item)
+
+        #TODO - remove food from food suplies
     return board
 
 def can_player_move(player, board, row, col):
@@ -122,7 +133,7 @@ def can_player_move(player, board, row, col):
 
 def create_board(player, width=5, height=5):
     board = build_an_empty_board(width, height)
-    board = build_gates_at_central_board(player, board)
+    board = build_gates_at_central_board(board)
 
     return board
 
